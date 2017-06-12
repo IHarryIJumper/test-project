@@ -1,0 +1,10 @@
+{
+	"department": [
+		{ "id": 0, "name": "First Department" },
+		{ "id": 1, "name": "Second Department" }
+	],
+	"employee": [
+		{ "id": 0, "firstName": "Andrey", "lastName": "Menshikh", "departmentId": 0  },
+		{ "id": 1, "firstName": "Ivan", "lastName": "Ivanov", "departmentId": 1  }
+	]
+}
