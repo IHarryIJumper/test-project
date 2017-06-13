@@ -4,6 +4,10 @@ import { render } from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
+import "regenerator-runtime/runtime";
+import createSagaMiddleware from 'redux-saga';
+import mySaga from './sagas/sagas.js';
+
 import createHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
 
@@ -14,7 +18,10 @@ import $ from 'jquery';
 
 const history = createHistory();
 const middleware = routerMiddleware(history)
-const store = createStore(combinedReducer, applyMiddleware(middleware));
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(combinedReducer, applyMiddleware(middleware), applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(mySaga);
 
 import DefaultComponent from './components/default/default.jsx';
 
