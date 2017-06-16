@@ -30,8 +30,6 @@ const testReducer = (state = defaultState, action) => {
 			break;
 	}
 
-	console.log('_newState:', _newState);
-
 	return _newState;
 };
 

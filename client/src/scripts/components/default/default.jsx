@@ -55,16 +55,25 @@ class DefaultComponent extends React.Component {
 		return renderValue;
 	}
 
+	componentWillUpdate(nextProps, nextState) {
+	}
+
 	componentWillMount() {
-		this.setState({
-			_isMounted: true
-		});
+		const { dispatch } = this.props;
+		switch (this.props.location.pathname) {
+			case '/':
+				dispatch({ type: 'SET_DEFAULT_PAGE', payload: null })
+				break;
+			case '/dep':
+				dispatch({ type: 'SET_DEPARTMENT_PAGE', payload: null })
+				break;
+			case '/emp':
+				dispatch({ type: 'SET_EMPLOYEE_PAGE', payload: null })
+				break;
+		}
 	}
 
 	componentWillUnmount() {
-		this.setState({
-			_isMounted: false
-		});
 	}
 
 	componentDidMount() { }

@@ -42,7 +42,10 @@ const webpackConfig = {
         extensions: ['.js', '.jsx']
     },
     plugins: getPlugins(),
-    externals: {},
+    externals: {
+         jquery: 'jQuery',
+         jquery: '$'
+    },
     devtool: 'eval',
     // devtool: 'cheap-inline-module-source-map',
     // devtool: 'cheap-module-eval-source-map',
