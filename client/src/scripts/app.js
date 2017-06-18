@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 import "regenerator-runtime/runtime";
 import createSagaMiddleware from 'redux-saga';
-import mySaga from './sagas/sagas.js';
+import rootSaga from './sagas/sagas.js';
 
 import createHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
@@ -32,17 +32,17 @@ middlewares.push(sagaMiddleware);
 console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV !== 'production') {
-  const { logger } = require(`redux-logger`);
+	const { logger } = require(`redux-logger`);
 
-  middlewares.push(logger);
+	middlewares.push(logger);
 }
 
 const store = compose(applyMiddleware(...middlewares))(createStore)(combinedReducer);
 
-
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga);
 
 import DefaultComponent from './components/default/default.jsx';
+import EmployeesComponent from './components/employees/employees.jsx';
 import HeaderComponent from './components/header/header.jsx';
 import PageContentComponent from './components/pageContent/pageContent.jsx';
 import FooterComponent from './components/footer/footer.jsx';
@@ -58,7 +58,7 @@ $(document).ready(function () {
 					<PageContentComponent>
 						<Route exact path="/" component={DefaultComponent} />
 						<Route path="/dep" component={DefaultComponent} />
-						<Route path="/emp" component={DefaultComponent} />
+						<Route path="/emp" component={EmployeesComponent} />
 						<Route path="*/index.html" component={DefaultComponent} />
 					</PageContentComponent>
 					<FooterComponent />
