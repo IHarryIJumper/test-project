@@ -50,8 +50,8 @@ const webpackConfig = {
         jquery: 'jQuery',
         jquery: '$'
     },
-    // devtool: 'eval',
-    devtool: 'cheap-inline-module-source-map',
+    devtool: 'eval',
+    // devtool: 'cheap-inline-module-source-map',
     // devtool: 'cheap-module-eval-source-map',
     // devtool: 'source-map',
     // devtool: 'cheap-eval-source-map',
