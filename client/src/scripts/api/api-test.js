@@ -1,12 +1,10 @@
 import Promise from 'bluebird';
 
-const fetchData = () => {
+const fetchData = (data, yeah) => {
 	debugger;
+	console.log(data, yeah);
 	return new Promise((resolve, reject) => {
-		debugger;
 		setTimeout(() => {
-
-			debugger;
 			resolve({
 				data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 			});

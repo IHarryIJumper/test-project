@@ -5,6 +5,8 @@ import {
 	Link
 } from 'react-router-dom';
 
+import { employeesCommActions } from '../../actions/actions';
+
 class DefaultComponent extends React.Component {
 	constructor(props) {
 		super(props);
@@ -18,6 +20,11 @@ class DefaultComponent extends React.Component {
 	getData() {
 		const { test, dispatch } = this.props;
 		dispatch({ type: 'DATA_FETCH_REQUESTED', payload: { request: true } });
+	}
+
+	employeesRequest() {
+		const { dispatch } = this.props;
+		dispatch(employeesCommActions.get());
 	}
 
 	renderRequestStage() {
@@ -53,6 +60,17 @@ class DefaultComponent extends React.Component {
 		}
 
 		return renderValue;
+	}
+
+	renderEmployeesData() {
+		const { employeeGetRequest, employeeGetSuccess, employeeGetFailed } = this.props.connections,
+			{ employees } = this.props;
+
+		if (employeeGetSuccess) {
+			return (<div>
+				{JSON.stringify(employees)}
+			</div>);
+		}
 	}
 
 	componentWillUpdate(nextProps, nextState) {
@@ -91,7 +109,9 @@ class DefaultComponent extends React.Component {
 					<li><Link to="/emp">Emp</Link></li>
 				</ul>
 				<button onClick={(event) => { this.getData(); }}>Push me!</button>
+				<button onClick={(event) => { this.employeesRequest(); }}>Get Employees</button>
 				{this.renderRequestStage()}
+				{this.renderEmployeesData()}
 			</div>
 
 		);
