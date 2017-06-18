@@ -1,24 +1,28 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const getPlugins = function () {
     var plugins = [];
 
-    var noErrorsPlugin = new webpack.NoEmitOnErrorsPlugin();
+    const noErrorsPlugin = new webpack.NoEmitOnErrorsPlugin();
 
-    var clearDist = new CleanWebpackPlugin(['dist', 'distImage'], {
+    const clearDist = new CleanWebpackPlugin(['dist', 'distImage'], {
         root: __dirname,
         verbose: true,
         dry: false
     });
 
-    var node_env = new webpack.DefinePlugin({
+    const node_env = new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify('development')
         }
     });
 
+    const cssExtract = new ExtractTextPlugin("[name].css");
+
+    plugins.push(cssExtract);
     plugins.push(node_env);
     plugins.push(clearDist);
     plugins.push(noErrorsPlugin);
@@ -43,11 +47,11 @@ const webpackConfig = {
     },
     plugins: getPlugins(),
     externals: {
-         jquery: 'jQuery',
-         jquery: '$'
+        jquery: 'jQuery',
+        jquery: '$'
     },
-    devtool: 'eval',
-    // devtool: 'cheap-inline-module-source-map',
+    // devtool: 'eval',
+    devtool: 'cheap-inline-module-source-map',
     // devtool: 'cheap-module-eval-source-map',
     // devtool: 'source-map',
     // devtool: 'cheap-eval-source-map',
@@ -64,7 +68,11 @@ const webpackConfig = {
             loader: 'babel-loader'
         }, {
             test: /\.css$/,
-            loader: "style-loader!css-loader"
+            // loader: "style-loader!css-loader"
+            loader: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: 'css-loader'
+            })
         }, {
             test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
             loader: 'file-loader'
