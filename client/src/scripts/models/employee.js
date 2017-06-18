@@ -1,3 +1,11 @@
+import Ajv from 'ajv';
+
+import {
+	EmployeeSchema
+} from '../schemas/schemas.js';
+
+const Validation = new Ajv().compile(EmployeeSchema);
+
 class Employee {
 	constructor(employee, id) {
 		if (arguments.length === 1) {
@@ -10,7 +18,7 @@ class Employee {
 	}
 
 	setEmployee(employee) {
-		if (employee.id !== undefined && employee.firstName !== undefined && employee.lastName !== undefined && employee.departmentId !== undefined) {
+		/*if (employee.id !== undefined && employee.firstName !== undefined && employee.lastName !== undefined && employee.departmentId !== undefined) {
 			if (typeof employee.id === 'number') {
 				this.id = employee.id;
 			} else if (typeof parseInt(employee.id) === 'number') {
@@ -37,14 +45,20 @@ class Employee {
 				this.departmentId = parseInt(employee.departmentId);
 			} else {
 				modelError(4);
-			}
+			}*/
+		const valid = Validation(employee);
+		if (valid) {
+			this.id = employee.id;
+			this.firstName = employee.firstName;
+			this.lastName = employee.lastName;
+			this.departmentId = employee.departmentId;
 		} else {
 			modelError(1);
 		}
 	}
 
 	setEmployeeWithId(employee, id) {
-		if (id !== undefined && employee.firstName !== undefined && employee.lastName !== undefined && employee.departmentId !== undefined) {
+		/*if (id !== undefined && employee.firstName !== undefined && employee.lastName !== undefined && employee.departmentId !== undefined) {
 			if (typeof id === 'number') {
 				this.id = id;
 			} else if (typeof parseInt(id) === 'number') {
@@ -71,7 +85,15 @@ class Employee {
 				this.departmentId = parseInt(employee.departmentId);
 			} else {
 				modelError(4);
-			};
+			};*/
+		const valid = Validation(Object.assign({}, employee, {
+			id
+		}));
+		if (valid) {
+			this.id = employee.id;
+			this.firstName = employee.firstName;
+			this.lastName = employee.lastName;
+			this.departmentId = employee.departmentId;
 		} else {
 			modelError(2);
 		}
@@ -113,6 +135,9 @@ class Employee {
 
 }
 
+import {
+	DepartmentSchema
+} from '../schemas/schemas.js';
 const modelError = (errorCode) => {
 	console.trace();
 	switch (errorCode) {
@@ -131,4 +156,4 @@ const modelError = (errorCode) => {
 	}
 };
 
-export default Employees;
+export default Employee;

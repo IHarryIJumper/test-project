@@ -1,3 +1,11 @@
+import Ajv from 'ajv';
+
+import {
+	DepartmentSchema
+} from '../schemas/schemas.js';
+
+const Validation = new Ajv().compile(DepartmentSchema);
+
 class Department {
 	constructor(department, id) {
 		if (arguments.length === 1) {
@@ -10,7 +18,7 @@ class Department {
 	}
 
 	setDepartment(department) {
-		if (department.id !== undefined && department.firstName !== undefined && department.lastName !== undefined && department.departmentId !== undefined) {
+		/*if (department.id !== undefined && department.firstName !== undefined && department.lastName !== undefined && department.departmentId !== undefined) {
 			if (typeof department.id === 'number') {
 				this.id = department.id;
 			} else if (typeof parseInt(department.id) === 'number') {
@@ -23,14 +31,18 @@ class Department {
 				this.name = department.name;
 			} else {
 				this.name = department.name.toString();
-			}	
+			}	*/
+		const valid = Validation(department);
+		if (valid) {
+			this.id = department.id;
+			this.name = department.name;
 		} else {
 			modelError(1);
 		}
 	}
 
 	setDepartmentWithId(department, id) {
-		if (id !== undefined && department.firstName !== undefined && department.lastName !== undefined && department.departmentId !== undefined) {
+		/*if (id !== undefined && department.firstName !== undefined && department.lastName !== undefined && department.departmentId !== undefined) {
 			if (typeof id === 'number') {
 				this.id = id;
 			} else if (typeof parseInt(id) === 'number') {
@@ -43,7 +55,13 @@ class Department {
 				this.name = department.name;
 			} else {
 				this.name = department.name.toString();
-			}
+			}*/
+		const valid = Validation(Object.assign({}, employee, {
+			id
+		}));
+		if (valid) {
+			this.id = id;
+			this.name = department.name;
 		} else {
 			modelError(2);
 		}
