@@ -57,7 +57,7 @@ const deleteEmployee = (id, data) => {
 //departments
 const getDepartments = () => {
 	return new Promise((resolve, reject) => {
-		Request.get('employee', (response) => {
+		Request.get('department', (response) => {
 			let data = [];
 			try {
 				if (typeof response === 'string') {
@@ -75,7 +75,7 @@ const getDepartments = () => {
 
 const addDepartment = (data) => {
 	return new Promise((resolve, reject) => {
-		Request.post('employee', data, (response) => {
+		Request.post('department', data, (response) => {
 			resolve(response);
 		}, (error) => {
 			reject(error);
@@ -85,7 +85,7 @@ const addDepartment = (data) => {
 
 const updateDepartment = (id, data) => {
 	return new Promise((resolve, reject) => {
-		Request.put('employee', id, data, (response) => {
+		Request.put('department', id, data, (response) => {
 			resolve(response);
 		}, (error) => {
 			reject(error);
@@ -95,7 +95,7 @@ const updateDepartment = (id, data) => {
 
 const deleteDepartment = (id, data) => {
 	return new Promise((resolve, reject) => {
-		Request.delete('employee', id, (response) => {
+		Request.delete('department', id, (response) => {
 			resolve(response);
 		}, (error) => {
 			reject(error);
