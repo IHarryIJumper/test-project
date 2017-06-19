@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Preloader matching schema with show=false 1`] = `null`;
+
+exports[`Preloader matching schema with show=true 1`] = `
+<div
+  className="preloader-container"
+>
+  <div
+    className="preloader"
+  />
+</div>
+`;
+
+exports[`Preloader matching schema without props 1`] = `
+<div
+  className="preloader-container"
+>
+  <div
+    className="preloader"
+  />
+</div>
+`;

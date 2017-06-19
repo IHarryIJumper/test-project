@@ -17,7 +17,7 @@ class SidebarComponent extends React.Component {
 			classPage = 'current';
 		}
 
-		return (<li className={classPage}><Link to="/dep"><i className="glyphicon glyphicon-home"></i>Departments</Link></li>);
+		return (<li className={classPage}><Link to="/dep" id="departments-button"><i className="glyphicon glyphicon-home"></i>Departments</Link></li>);
 	}
 
 	renderEmployeePage() {
@@ -27,7 +27,7 @@ class SidebarComponent extends React.Component {
 			classPage = 'current';
 		}
 
-		return (<li className={classPage}><Link to="/emp"><i className="glyphicon glyphicon-globe"></i>Employees</Link></li>);
+		return (<li className={classPage}><Link to="/emp" id="employees-button"><i className="glyphicon glyphicon-globe"></i>Employees</Link></li>);
 	}
 
 	componentWillMount() { }

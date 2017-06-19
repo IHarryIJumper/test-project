@@ -49,34 +49,10 @@ class Department {
 		}
 	}
 
-	getAll() {
-		return this.departments;
-	}
-
-	getOneById(id) {
-		let _found = false,
-			returnElement = null;
-
-		this.departments.every((department, departmentIndex) => {
-			if (department.id === id) {
-				_found = true;
-				returnElement = this.departments[departmentIndex];
-			}
-
-			return !_found;
-		});
-
-		return returnElement;
-	}
-
-	getOneByIndex(index) {
-		return this.departments[index];
-	}
-
 }
 
 const modelError = (errorCode) => {
-	console.trace();
+	// console.trace();
 	switch (errorCode) {
 		case 0:
 			throw 'Department model: Wrong model initialization';

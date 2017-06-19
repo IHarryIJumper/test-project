@@ -96,7 +96,7 @@ class EmployeesComponent extends React.Component {
 
 		return (
 
-			<div className="content-box-large">
+			<div id="employees-table" className="content-box-large">
 				<div className="panel-heading">
 					<div className="panel-title">Employees Table</div>
 

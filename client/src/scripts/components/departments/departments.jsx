@@ -76,7 +76,7 @@ class DepartmentsComponent extends React.Component {
 
 		return (
 
-			<div className="content-box-large">
+			<div id="departments-table" className="content-box-large">
 				<div className="panel-heading">
 					<div className="panel-title">Departments Table</div>
 				</div>

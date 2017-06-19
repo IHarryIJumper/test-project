@@ -50,3 +50,5 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default connect(mapStateToProps)(HeaderComponent);
+
+// export default HeaderComponent;

@@ -54,37 +54,13 @@ class Employee {
 		}
 	}
 
-	getAll() {
-		return this.employees;
-	}
-
-	getOneById(id) {
-		let _found = false,
-			returnElement = null;
-
-		this.employees.every((employee, employeeIndex) => {
-			if (employee.id === id) {
-				_found = true;
-				returnElement = this.employees[employeeIndex];
-			}
-
-			return !_found;
-		});
-
-		return returnElement;
-	}
-
-	getOneByIndex(index) {
-		return this.employees[index];
-	}
-
 }
 
 import {
 	DepartmentSchema
 } from '../schemas/schemas.js';
 const modelError = (errorCode) => {
-	console.trace();
+	// console.trace();
 	switch (errorCode) {
 		case 0:
 			throw 'Employee model: Wrong model initialization';
