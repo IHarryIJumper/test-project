@@ -47,25 +47,25 @@ import HeaderComponent from './components/header/header.jsx';
 import PageContentComponent from './components/pageContent/pageContent.jsx';
 import FooterComponent from './components/footer/footer.jsx';
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
-	render(
-		<Provider store={store}>
+render(
+	<Provider store={store}>
 
-			<ConnectedRouter history={history}>
-				<div>
-					<HeaderComponent />
-					<PageContentComponent>
-						<Route exact path="/" component={DefaultComponent} />
-						<Route path="/dep" component={DefaultComponent} />
-						<Route path="/emp" component={EmployeesComponent} />
-						<Route path="*/index.html" component={DefaultComponent} />
-					</PageContentComponent>
-					<FooterComponent />
-				</div>
-			</ConnectedRouter>
+		<ConnectedRouter history={history}>
+			<div>
+				<HeaderComponent />
+				<PageContentComponent>
+					<Route exact path="/" component={DefaultComponent} />
+					<Route path="/dep" component={DefaultComponent} />
+					<Route path="/emp" component={EmployeesComponent} />
+					<Route path="*/index.html" component={DefaultComponent} />
+				</PageContentComponent>
+				<FooterComponent />
+			</div>
+		</ConnectedRouter>
 
-		</Provider>,
-		document.getElementById('app')
-	);
-});
+	</Provider>,
+	document.getElementById('app')
+);
+// });
