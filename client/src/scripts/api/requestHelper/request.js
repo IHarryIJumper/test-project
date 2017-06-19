@@ -110,6 +110,9 @@ export const deleteRequest = (path, id, successFunction, errorFunction) => {
 const getUrl = () => {
 	if (process.env.NODE_ENV === 'serverProduction') {
 		return 'http://iharryijumper.asuscomm.com:3000';
+	}
+	if (process.env.NODE_ENV === 'localTest') {
+		return 'http://192.168.0.186:3000';
 	} else {
 		return 'http://localhost:3000';
 	}

@@ -635,6 +635,15 @@ select.form-control {
     padding: 4px 12px
 }
 
+#app {
+    position: relative;
+    min-height: 100%;
+}
+
+#app .page-content {
+    padding-bottom: 75px;
+}
+
 
 /* Responsive CSS */
 
