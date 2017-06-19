@@ -20,6 +20,7 @@ const employeesReducer = (state = defaultState, action) => {
 			break;
 		case 'DELETE_EMPLOYEES':
 			_newState.deleteSeveral(action.payload.idArray);
+			break;
 		default:
 			_newState = state;
 			break;

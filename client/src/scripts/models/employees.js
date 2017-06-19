@@ -50,12 +50,13 @@ class Employees {
 
 	deleteSeveral(idArray) {
 		if (Array.isArray(idArray)) {
+			
 			idArray.map((id, idIndex) => {
 				let _foundEmployee = false;
-				this.departments.every((department, departmentIndex) => {
-					if (department.id === id) {
+				this.employees.every((employee, employeeIndex) => {
+					if (employee.id === id) {
 						_foundEmployee = true;
-						this.departments.splice(departmentIndex, 1);
+						this.employees.splice(employeeIndex, 1);
 					}
 
 					return !_foundEmployee;
