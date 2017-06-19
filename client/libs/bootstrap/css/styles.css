@@ -590,6 +590,10 @@ body {
     font-size: 18px;
 }
 
+.panel-heading {
+    display: inline-block;
+}
+
 .panel-heading>.panel-title,
 .content-box-header .panel-title {
     float: left;
@@ -620,6 +624,15 @@ body {
 
 .panel-body {
     clear: both;
+}
+
+.form-control {
+    font-size: 12px;
+    height: 24px;
+}
+
+select.form-control {
+    padding: 4px 12px
 }
 
 
