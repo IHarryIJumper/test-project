@@ -36,4 +36,13 @@ export const employeesActions = {
 		}
 	},
 
+	deleteSeveral(idArray) {
+		return {
+			type: 'DELETE_EMPLOYEES',
+			payload: {
+				idArray
+			}
+		}
+	},
+
 }

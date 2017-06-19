@@ -46,6 +46,7 @@ class Employee {
 			} else {
 				modelError(4);
 			}*/
+
 		const valid = Validation(employee);
 		if (valid) {
 			this.id = employee.id;
@@ -86,6 +87,7 @@ class Employee {
 			} else {
 				modelError(4);
 			};*/
+			debugger;
 		const valid = Validation(Object.assign({}, employee, {
 			id
 		}));

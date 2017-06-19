@@ -48,6 +48,22 @@ class Departments {
 		});
 	}
 
+	deleteSeveral(idArray) {
+		if (Array.isArray(idArray)) {
+			idArray.map((id, idIndex) => {
+				let _foundDepartment = false;
+				this.departments.every((department, departmentIndex) => {
+					if (department.id === id) {
+						_foundDepartment = true;
+						this.departments.splice(departmentIndex, 1);
+					}
+
+					return !_foundDepartment;
+				});
+			});
+		}
+	}
+
 	update(newData) {
 		let _found = false;
 
@@ -83,6 +99,16 @@ class Departments {
 
 	getOneByIndex(index) {
 		return this.departments[index];
+	}
+
+	getIds() {
+		const ids = [];
+
+		this.departments.map((department, departmentIndex) => {
+			ids.push(department.id);
+		});
+
+		return ids;
 	}
 
 }

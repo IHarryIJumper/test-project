@@ -1,19 +1,19 @@
 export const departmentsActions = {
 
-	setDepartments(employees) {
+	setDepartments(departments) {
 		return {
 			type: 'SET_DEPARTMENTS',
 			payload: {
-				employees
+				departments
 			}
 		}
 	},
 
-	add(employee) {
+	add(department) {
 		return {
 			type: 'ADD_DEPARTMENT',
 			payload: {
-				employee
+				department
 			}
 		}
 	},
@@ -32,6 +32,15 @@ export const departmentsActions = {
 			type: 'DELETE_DEPARTMENT',
 			payload: {
 				id
+			}
+		}
+	},
+
+	deleteSeveral(idArray) {
+		return {
+			type: 'DELETE_DEPARTMENTS',
+			payload: {
+				idArray
 			}
 		}
 	},

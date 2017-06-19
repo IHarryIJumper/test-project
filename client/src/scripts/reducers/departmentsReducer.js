@@ -3,6 +3,7 @@ import Departments from '../models/departments.js';
 const defaultState = new Departments();
 
 const departmentsReducer = (state = defaultState, action) => {
+	
 	let _newState = new Departments(Object.assign({}, state).departments);
 	// let _newState = state;
 	switch (action.type) {
@@ -17,6 +18,9 @@ const departmentsReducer = (state = defaultState, action) => {
 			break;
 		case 'DELETE_DEPARTMENT':
 			_newState.delete(action.payload.id);
+			break;
+		case 'DELETE_DEPARTMENTS':
+			_newState.deleteSeveral(action.payload.idArray);
 			break;
 		default:
 			_newState = state;

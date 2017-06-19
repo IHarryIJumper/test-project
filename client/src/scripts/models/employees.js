@@ -48,6 +48,22 @@ class Employees {
 		});
 	}
 
+	deleteSeveral(idArray) {
+		if (Array.isArray(idArray)) {
+			idArray.map((id, idIndex) => {
+				let _foundEmployee = false;
+				this.departments.every((department, departmentIndex) => {
+					if (department.id === id) {
+						_foundEmployee = true;
+						this.departments.splice(departmentIndex, 1);
+					}
+
+					return !_foundEmployee;
+				});
+			});
+		}
+	}
+
 	update(newData) {
 		let _found = false;
 
