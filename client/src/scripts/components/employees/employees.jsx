@@ -1,22 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-	Link
-} from 'react-router-dom';
-
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
-import { employeesCommActions } from '../../actions/actions';
+import PreloaderComponent from '../preloader/preloader.jsx';
+
+import Validators from '../../validators/validators.js';
+
+import { employeesCommActions, employeesActions, departmentsCommActions, departmentsActions } from '../../actions/actions';
 
 class EmployeesComponent extends React.Component {
 	constructor(props) {
 		super(props);
-	}
 
-	getData() {
-		const { test, dispatch } = this.props;
-		dispatch({ type: 'DATA_FETCH_REQUESTED', payload: { request: true } });
+		this.addNewEmployee = this.addNewEmployee.bind(this);
+		this.deleteEmployees = this.deleteEmployees.bind(this);
+		this.onBeforeSaveCell = this.onBeforeSaveCell.bind(this);
+		this.onAfterSaveCell = this.onAfterSaveCell.bind(this);
 	}
 
 	employeesRequest() {
@@ -24,68 +24,100 @@ class EmployeesComponent extends React.Component {
 		dispatch(employeesCommActions.get());
 	}
 
-	renderRequestStage() {
-		const { dataSuccess, dataFailed, dataRequested } = this.props.test;
-
-		let renderValue = null;
-
-		if (dataRequested === true) {
-			const style = {
-				width: 133,
-				height: 100,
-				display: 'block'
-			}
-			renderValue = (<img src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif" alt="waiting request..." style={style} />);
-		} else {
-			if (dataSuccess !== false && dataFailed === false) {
-				renderValue = (
-					<div>
-						<h1>Success request! </h1>
-						<p>Data: {JSON.stringify(dataSuccess)} </p>
-					</div>
-				);
-			}
-
-			if (dataFailed !== false && dataSuccess === false) {
-				renderValue = (
-					<div>
-						<h1>Success failed :(</h1>
-						<p>Message: {JSON.stringify(dataFailed)}</p>
-					</div>
-				);
-			}
-		}
-
-		return renderValue;
+	departmentsRequest() {
+		const { dispatch } = this.props;
+		dispatch(departmentsCommActions.get());
 	}
 
-	renderEmployeesData() {
-		const { employeeGetRequest, employeeGetSuccess, employeeGetFailed } = this.props.connections,
-			{ employees } = this.props;
 
-		if (employeeGetSuccess) {
-			return (<div>
-				{JSON.stringify(employees)}
-			</div>);
+	addNewEmployee(employee) {
+		const { employees } = this.props.employees,
+			{ dispatch } = this.props;
+
+		if (employees.length !== 0) {
+			employee.id = employees[employees.length - 1].id + 1;
+		} else {
+			employee.id = 0;
 		}
+		
+		employee.departmentId = parseInt(employee.departmentId);
+
+		dispatch(employeesActions.add(employee));
+	}
+
+	deleteEmployees(employees) {
+		const { dispatch } = this.props;
+		dispatch(employeesActions.deleteSeveral(employees));
+	}
+
+	onBeforeSaveCell(row, cellName, cellValue) {
+		let valid = true;
+		if (cellName === 'name') {
+			valid = Validators.stringValidator(cellValue, row)
+		}
+		return valid;
+	}
+
+	onAfterSaveCell(row, cellName, cellValue) {
+		const { dispatch } = this.props;
+		row.id = parseInt(row.id);
+		row.departmentId = parseInt(row.departmentId);
+		dispatch(employeesActions.update(row));
 	}
 
 	renderEmployeesTable() {
 
-		const { employees } = this.props.employees;
+		const { employees } = this.props.employees,
+			{ departments } = this.props;
 
-		let renderValue = (
-			<BootstrapTable data={employees} striped={true} hover={true} pagination={true} insertRow={true} deleteRow={true} cellEdit={{
-				mode: 'dbclick'
-			}}>
-				<TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true}>Employee ID</TableHeaderColumn>
-				<TableHeaderColumn dataField="firstName" dataSort={true}>First Name</TableHeaderColumn>
-				<TableHeaderColumn dataField="lastName" dataSort={true}>Last Name</TableHeaderColumn>
-				<TableHeaderColumn dataField="departmentId" dataAlign="center" dataSort={true}>Department ID</TableHeaderColumn>
-			</BootstrapTable>
+		const options = {
+			afterInsertRow: this.addNewEmployee,
+			afterDeleteRow: this.deleteEmployees
+		},
+			selectRowProp = {
+				mode: 'checkbox'
+			},
+			cellEditProp = {
+				mode: 'dbclick',
+				blurToSave: true,
+				beforeSaveCell: this.onBeforeSaveCell,
+				afterSaveCell: this.onAfterSaveCell
+			},
+			stringColumn = {
+				validator: Validators.stringValidator
+			},
+			departmentIdColumn = {
+				type: 'select',
+				options: {
+					values: departments.getIds()
+				},
+				validator: Validators.numberValidator
+			};
+
+		return (
+
+			<div className="content-box-large">
+				<div className="panel-heading">
+					<div className="panel-title">Employees Table</div>
+
+				</div>
+				<div className="panel-options">
+					<BootstrapTable data={employees} striped={true} hover={true} pagination={true} insertRow={true} deleteRow={true} cellEdit={cellEditProp} selectRow={selectRowProp} options={options}>
+						<TableHeaderColumn dataField="id" isKey={true} dataAlign="center" dataSort={true} autoValue={true}>Employee ID</TableHeaderColumn>
+						<TableHeaderColumn dataField="firstName" dataSort={true} editable={stringColumn}>First Name</TableHeaderColumn>
+						<TableHeaderColumn dataField="lastName" dataSort={true} editable={stringColumn}>Last Name</TableHeaderColumn>
+						<TableHeaderColumn dataField="departmentId" dataAlign="center" dataSort={true} editable={departmentIdColumn}>Department ID</TableHeaderColumn>
+					</BootstrapTable>
+				</div>
+
+			</div>
 		);
+	}
 
-		return renderValue;
+	renderPreloader() {
+		const { employeeGetSuccess, employeeGetRequest } = this.props.connections;
+
+		return (<PreloaderComponent show={!employeeGetSuccess || employeeGetRequest} />);
 	}
 
 	componentWillUpdate(nextProps, nextState) {
@@ -109,28 +141,25 @@ class EmployeesComponent extends React.Component {
 	componentWillUnmount() {
 	}
 
-	componentDidMount() { }
+	componentDidMount() {
+		const { employeeGetSuccess } = this.props.connections,
+			{ departmentGetSuccess } = this.props.connections;
+
+		if (!employeeGetSuccess) {
+			this.employeesRequest();
+		}
+
+		if (!departmentGetSuccess) {
+			this.departmentsRequest();
+		}
+	}
 
 	render() {
 		return (
-			<div id='default-page'>
-				Default page.
-				Time {String(new Date())}.
-				<br />
-				Current location: {this.props.location.pathname}
-				<ul>
-					<li><Link to="/">Home</Link></li>
-					<li><Link to="/dep">Dep</Link></li>
-					<li><Link to="/emp">Emp</Link></li>
-				</ul>
-				<button onClick={(event) => { this.getData(); }}>Push me!</button>
-				<button onClick={(event) => { this.employeesRequest(); }}>Get Employees</button>
-				{this.renderRequestStage()}
-				{this.renderEmployeesData()}
-
+			<div className="col-md-12">
+				{this.renderPreloader()}
 				{this.renderEmployeesTable()}
 			</div>
-
 		);
 	}
 }

@@ -43,6 +43,7 @@ sagaMiddleware.run(rootSaga);
 
 import DefaultComponent from './components/default/default.jsx';
 import EmployeesComponent from './components/employees/employees.jsx';
+import DepartmentsComponent from './components/departments/departments.jsx';
 import HeaderComponent from './components/header/header.jsx';
 import PageContentComponent from './components/pageContent/pageContent.jsx';
 import FooterComponent from './components/footer/footer.jsx';
@@ -56,10 +57,9 @@ render(
 			<div>
 				<HeaderComponent />
 				<PageContentComponent>
-					<Route exact path="/" component={DefaultComponent} />
-					<Route path="/dep" component={DefaultComponent} />
+					<Route exact path="/" component={DepartmentsComponent} />
+					<Route path="/dep" component={DepartmentsComponent} />
 					<Route path="/emp" component={EmployeesComponent} />
-					<Route path="*/index.html" component={DefaultComponent} />
 				</PageContentComponent>
 				<FooterComponent />
 			</div>
