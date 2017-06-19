@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const getPlugins = function () {
     var plugins = [];
@@ -36,7 +35,6 @@ const getPlugins = function () {
         this.plugin("done", function (stats) {
             setTimeout(function () {
                 console.log('Client build finished!');
-                // process.exit(0)
             }, 1000);
         });
     }
@@ -54,8 +52,6 @@ const webpackConfig = {
     },
     output: {
         path: path.join(__dirname, 'public'),
-        // sourceMapFilename: "debugging/[file].map",
-        // filename: '[name].js'
         filename: '[name].js'
     },
     resolve: {
@@ -86,7 +82,6 @@ const webpackConfig = {
             }
         }, {
             test: /\.css$/,
-            // loader: "style-loader!css-loader"
             loader: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
                 use: 'css-loader'

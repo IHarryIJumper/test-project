@@ -108,8 +108,8 @@ export const deleteRequest = (path, id, successFunction, errorFunction) => {
 }
 
 const getUrl = () => {
-	// if (process.env.NODE_ENV === 'serverProduction') {
-	if (process.env.NODE_ENV === 'production') {
+	if (process.env.NODE_ENV === 'serverProduction') {
+	// if (process.env.NODE_ENV === 'production') {
 		return 'http://iharryijumper.asuscomm.com:3000';
 	}
 	if (process.env.NODE_ENV === 'localTest') {
