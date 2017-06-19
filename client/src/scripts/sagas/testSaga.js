@@ -8,7 +8,7 @@ import API from '../api/api-test.js';
 
 function* fetchData(action) {
 	try {
-		debugger;
+		
 		const data = yield call(API.fetchData, action.payload.request, 'yeah');
 		yield put({
 			type: "DATA_FETCH_SUCCESS",

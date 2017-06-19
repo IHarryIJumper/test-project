@@ -1,10 +1,34 @@
 {
-	"department": [
-		{ "id": 0, "name": "First Department" },
-		{ "id": 1, "name": "Second Department" }
-	],
-	"employee": [
-		{ "id": 0, "firstName": "Andrey", "lastName": "Menshikh", "departmentId": 0  },
-		{ "id": 1, "firstName": "Ivan", "lastName": "Ivanov", "departmentId": 1  }
-	]
+  "department": [
+    {
+      "id": 0,
+      "name": "First Department"
+    },
+    {
+      "id": 1,
+      "name": "Second Department"
+    },
+    {
+      "id": 2,
+      "name": "Third Department"
+    },
+    {
+      "id": 3,
+      "name": "Fourth Department"
+    }
+  ],
+  "employee": [
+    {
+      "id": 0,
+      "firstName": "Andrey",
+      "lastName": "Menshikh",
+      "departmentId": 0
+    },
+    {
+      "id": 1,
+      "firstName": "Ivan",
+      "lastName": "Ivanov",
+      "departmentId": 1
+    }
+  ]
 }
