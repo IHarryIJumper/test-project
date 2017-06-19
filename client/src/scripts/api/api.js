@@ -43,9 +43,9 @@ const updateEmployee = (id, data) => {
 	});
 };
 
-const deleteEmployee = (id, data) => {
+const deleteEmployee = (id) => {
 	return new Promise((resolve, reject) => {
-		Request.delete('employee', id, (response) => {
+		Request.deleteRequest('employee', id, (response) => {
 			resolve(response);
 		}, (error) => {
 			reject(error);
@@ -97,9 +97,10 @@ const updateDepartment = (id, data) => {
 	});
 };
 
-const deleteDepartment = (id, data) => {
+const deleteDepartment = (id) => {
 	return new Promise((resolve, reject) => {
-		Request.delete('department', id, (response) => {
+		
+		Request.deleteRequest('department', id, (response) => {
 			resolve(response);
 		}, (error) => {
 			reject(error);

@@ -35,8 +35,7 @@ export const post = (path, data, successFunction, errorFunction) => {
 
 	http.onreadystatechange = function () {
 		if (http.readyState === 4) {
-
-			if (http.status === 200) {
+			if (http.status === 201) {
 				if (successFunction != undefined) {
 					successFunction(http.responseText);
 				}
@@ -63,6 +62,7 @@ export const put = (path, id, data, successFunction, errorFunction) => {
 	http.onreadystatechange = function () {
 		if (http.readyState === 4) {
 
+			
 			if (http.status === 200) {
 				if (successFunction != undefined) {
 					successFunction(http.responseText);
@@ -89,6 +89,7 @@ export const deleteRequest = (path, id, successFunction, errorFunction) => {
 	http.onreadystatechange = function () {
 		if (http.readyState === 4) {
 
+			
 			if (http.status === 200) {
 				if (successFunction != undefined) {
 					successFunction(http.responseText);
