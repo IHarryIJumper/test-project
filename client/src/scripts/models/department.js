@@ -56,7 +56,7 @@ class Department {
 			} else {
 				this.name = department.name.toString();
 			}*/
-		const valid = Validation(Object.assign({}, employee, {
+		const valid = Validation(Object.assign({}, department, {
 			id
 		}));
 		if (valid) {
