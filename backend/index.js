@@ -4,6 +4,8 @@ const path = require('path');
 const router = jsonServer.router(path.join(__dirname, './db.json'));
 const middlewares = jsonServer.defaults();
 
+const port = 3000;
+
 server.use(middlewares);
 
 server.get('/echo', (req, res) => {
@@ -19,14 +21,16 @@ server.get('/dep', (req, res) => {
 });
 
 server.use(jsonServer.bodyParser);
-server.use((req, res, next) => {
+/*server.use((req, res, next) => {
 	if (req.method === 'POST') {
-		req.body.createdAt = Date.now();
+		// req.body.createdAt = Date.now();
+		console.log(req);
 	}
 	next();
-});
+});*/
 
 server.use(router);
-server.listen(3000, () => {
-	console.log('JSON Server is running')
+server.listen(port, () => {
+	console.log('JSON Server is running');
+	console.log('http://localhost:' + port + '/');
 });
