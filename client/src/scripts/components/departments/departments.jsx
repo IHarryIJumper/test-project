@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
 import { connect } from 'react-redux';
 
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+// import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import PreloaderComponent from '../preloader/preloader.jsx';
 

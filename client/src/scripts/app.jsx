@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { render } from 'react-dom';
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
@@ -14,7 +14,6 @@ import { Route } from 'react-router';
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 import { combinedReducer } from './reducers/reducers.js';
 
-// import $ from 'jquery';
 
 import '../../libs/bootstrap/css/bootstrap.min.css';
 import '../../libs/bootstrap/css/styles.css';
@@ -48,8 +47,6 @@ import HeaderComponent from './components/header/header.jsx';
 import PageContentComponent from './components/pageContent/pageContent.jsx';
 import FooterComponent from './components/footer/footer.jsx';
 
-// $(document).ready(function () {
-
 render(
 	<Provider store={store}>
 
@@ -68,4 +65,3 @@ render(
 	</Provider>,
 	document.getElementById('app')
 );
-// });

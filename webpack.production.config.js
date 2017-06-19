@@ -9,7 +9,8 @@ const getPlugins = function () {
 
     const noErrorsPlugin = new webpack.NoEmitOnErrorsPlugin();
 
-    const clearDist = new CleanWebpackPlugin(['dist', 'distImage'], {
+    const clearDist = new CleanWebpackPlugin(['public'], {
+        exclude:  ['index.html'],
         root: __dirname,
         verbose: true,
         dry: false
@@ -17,8 +18,9 @@ const getPlugins = function () {
 
     const node_env = new webpack.DefinePlugin({
         'process.env': {
-            // 'NODE_ENV': JSON.stringify('production')
-            'NODE_ENV': JSON.stringify('localTest')
+            // 'NODE_ENV': JSON.stringify('serverProduction')
+            'NODE_ENV': JSON.stringify('production')
+            // 'NODE_ENV': JSON.stringify('localTest')
         }
     });
 
@@ -52,7 +54,7 @@ const webpackConfig = {
     },
     output: {
         path: path.join(__dirname, 'public'),
-        sourceMapFilename: "debugging/[file].map",
+        // sourceMapFilename: "debugging/[file].map",
         // filename: '[name].js'
         filename: '[name].js'
     },
@@ -61,8 +63,8 @@ const webpackConfig = {
     },
     plugins: getPlugins(),
     externals: {
-        jquery: 'jQuery',
-        jquery: '$'
+        react: 'React',
+        'react-dom': 'ReactDOM'
     },
     devtool: 'cheap-source-map',
     module: {

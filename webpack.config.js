@@ -8,7 +8,8 @@ const getPlugins = function () {
 
     const noErrorsPlugin = new webpack.NoEmitOnErrorsPlugin();
 
-    const clearDist = new CleanWebpackPlugin(['dist', 'distImage'], {
+    const clearDist = new CleanWebpackPlugin(['public'], {
+        exclude: ['index.html'],
         root: __dirname,
         verbose: true,
         dry: false
@@ -47,8 +48,8 @@ const webpackConfig = {
     },
     plugins: getPlugins(),
     externals: {
-        jquery: 'jQuery',
-        jquery: '$'
+        react: 'React',
+        'react-dom': 'ReactDOM',
     },
     devtool: 'eval',
     // devtool: 'cheap-inline-module-source-map',

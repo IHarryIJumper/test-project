@@ -18,20 +18,6 @@ class Department {
 	}
 
 	setDepartment(department) {
-		/*if (department.id !== undefined && department.firstName !== undefined && department.lastName !== undefined && department.departmentId !== undefined) {
-			if (typeof department.id === 'number') {
-				this.id = department.id;
-			} else if (typeof parseInt(department.id) === 'number') {
-				this.id = parseInt(department.id);
-			} else {
-				modelError(3);
-			}
-
-			if (typeof department.name === 'string') {
-				this.name = department.name;
-			} else {
-				this.name = department.name.toString();
-			}	*/
 		const valid = Validation(department);
 		if (valid) {
 			this.id = department.id;
@@ -42,20 +28,6 @@ class Department {
 	}
 
 	setDepartmentWithId(department, id) {
-		/*if (id !== undefined && department.firstName !== undefined && department.lastName !== undefined && department.departmentId !== undefined) {
-			if (typeof id === 'number') {
-				this.id = id;
-			} else if (typeof parseInt(id) === 'number') {
-				this.id = parseInt(id);
-			} else {
-				modelError(3);
-			}
-
-			if (typeof department.name === 'string') {
-				this.name = department.name;
-			} else {
-				this.name = department.name.toString();
-			}*/
 		const valid = Validation(Object.assign({}, department, {
 			id
 		}));
