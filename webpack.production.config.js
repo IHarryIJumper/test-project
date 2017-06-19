@@ -46,7 +46,7 @@ const getPlugins = function () {
 const webpackConfig = {
     entry: {
         app: [
-            __dirname + '/client/src/scripts/app.js'
+            __dirname + '/client/src/scripts/app.jsx'
         ]
     },
     output: {
