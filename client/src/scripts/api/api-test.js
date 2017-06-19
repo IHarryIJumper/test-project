@@ -1,7 +1,7 @@
 import Promise from 'bluebird';
 
 const fetchData = (data, yeah) => {
-	debugger;
+	
 	console.log(data, yeah);
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {

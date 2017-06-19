@@ -1,5 +1,4 @@
 export const get = (path, successFunction, errorFunction) => {
-
 	const http = new XMLHttpRequest();
 
 	http.open("GET", getUrl() + "/" + path, true);

@@ -58,6 +58,8 @@ const deleteEmployee = (id, data) => {
 const getDepartments = () => {
 	return new Promise((resolve, reject) => {
 		Request.get('department', (response) => {
+
+			
 			let data = [];
 			try {
 				if (typeof response === 'string') {
@@ -68,6 +70,8 @@ const getDepartments = () => {
 			}
 			resolve(data);
 		}, (error) => {
+
+			
 			reject(error);
 		})
 	});
